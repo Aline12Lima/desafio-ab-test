@@ -1,0 +1,42 @@
+# Relatório de Teste A/B — {{ nome_teste }}
+
+**Período:** {{ periodo }}  ·  **Variantes:** {{ n_grupos }}  ·  **Gerado em:** {{ data_geracao }}
+
+---
+
+## Decisão: {{ selo }}
+
+**{{ titulo_decisao }}**
+
+{{ justificativa }}
+
+---
+
+## Métricas por variante
+
+| Variante | Cashback (% GMV) | Compradores | GMV | Margem total | Margem/comprador |
+|---|---|---|---|---|---|
+{% for l in linhas -%}
+| {{ l.grupo }}{{ l.marca }} | {{ l.cashback_pct }} | {{ l.compradores }} | {{ l.gmv }} | {{ l.margem }} | {{ l.margem_comp }} |
+{% endfor %}
+
+_A variante recomendada está marcada com ◄._
+
+---
+
+## Comparação decisiva — {{ comp.campeao }} vs {{ comp.vice }}
+
+O confronto contra o 2º colocado (o desafiante mais forte) decide o teste: vencer aqui implica vencer todos os demais.
+
+- **Diferença de margem:** {{ comp.dif_dia }}/dia ({{ comp.dif_pct }} vs {{ comp.vice }})
+- **Significância:** p {{ comp.p }} — Wilcoxon pareado, {{ comp.n_dias }} dias
+- **Intervalo de confiança 95%:** {{ comp.ic }} por dia
+- **Tamanho de efeito:** {{ comp.efeito }} (d de Cohen = {{ comp.d }})
+
+---
+
+## Como ler / ressalvas
+
+- **Métrica de decisão:** margem líquida (comissão − cashback). Volume (compradores, GMV) é diagnóstico, não objetivo — mais compradores à custa de margem menor não é crescimento sustentável.
+- **Premissa:** os dados trazem compradores, não usuários expostos por variante. A leitura assume divisão de tráfego balanceada entre os grupos (padrão de A/B randomizado).
+- **Materialidade:** exige-se diferença mínima de {{ limiar_pct }} vs 2º colocado para recomendar a troca; abaixo disso, o resultado é sinalizado como ganho modesto.

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parceiro B</title><style>
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; line-height: 1.6;
+    max-width: 820px; margin: 40px auto; padding: 0 20px; color: #1a1a1a; }
+  h1 { font-size: 1.6rem; border-bottom: 2px solid #eee; padding-bottom: .3em; }
+  h2 { font-size: 1.2rem; margin-top: 2em; color: #0F6E56; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: .95rem; }
+  th, td { border: 1px solid #e2e2e2; padding: 8px 12px; text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  th { background: #f6f8f7; }
+  hr { border: none; border-top: 1px solid #eee; margin: 1.5em 0; }
+  em { color: #666; }
+</style></head><body>
+<h1>Relatório de Teste A/B — Parceiro B</h1>
+<p><strong>Período:</strong> 01/05/2011 a 30/06/2011  ·  <strong>Variantes:</strong> 3  ·  <strong>Gerado em:</strong> 12/07/2026 16:53</p>
+<hr />
+<h2>Decisão: ESCALAR</h2>
+<p><strong>Escalar Grupo 1 para 100% do tráfego</strong></p>
+<p>Grupo 1 tem a maior margem total e supera Grupo 2 em +100% ao dia (p=1.1e-11, d de Cohen=1.97). Diferença real e material — escalar Grupo 1 a 100%.</p>
+<hr />
+<h2>Métricas por variante</h2>
+<table>
+<thead>
+<tr>
+<th>Variante</th>
+<th>Cashback (% GMV)</th>
+<th>Compradores</th>
+<th>GMV</th>
+<th>Margem total</th>
+<th>Margem/comprador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grupo 1 ◄</td>
+<td>4,0%</td>
+<td>7.990</td>
+<td>R$ 4.093.818</td>
+<td>R$ 286.570</td>
+<td>R$ 35,87</td>
+</tr>
+<tr>
+<td>Grupo 2</td>
+<td>6,0%</td>
+<td>5.452</td>
+<td>R$ 2.863.019</td>
+<td>R$ 143.157</td>
+<td>R$ 26,26</td>
+</tr>
+<tr>
+<td>Grupo 3</td>
+<td>9,0%</td>
+<td>5.029</td>
+<td>R$ 2.629.963</td>
+<td>R$ 52.593</td>
+<td>R$ 10,46</td>
+</tr>
+</tbody>
+</table>
+<p><em>A variante recomendada está marcada com ◄.</em></p>
+<hr />
+<h2>Comparação decisiva — Grupo 1 vs Grupo 2</h2>
+<p>O confronto contra o 2º colocado (o desafiante mais forte) decide o teste: vencer aqui implica vencer todos os demais.</p>
+<ul>
+<li><strong>Diferença de margem:</strong> R$ 2.351/dia (+100% vs Grupo 2)</li>
+<li><strong>Significância:</strong> p &lt; 0,001 — Wilcoxon pareado, 61 dias</li>
+<li><strong>Intervalo de confiança 95%:</strong> R$ 2.045 a R$ 2.657 por dia</li>
+<li><strong>Tamanho de efeito:</strong> grande (d de Cohen = 1,97)</li>
+</ul>
+<hr />
+<h2>Como ler / ressalvas</h2>
+<ul>
+<li><strong>Métrica de decisão:</strong> margem líquida (comissão − cashback). Volume (compradores, GMV) é diagnóstico, não objetivo — mais compradores à custa de margem menor não é crescimento sustentável.</li>
+<li><strong>Premissa:</strong> os dados trazem compradores, não usuários expostos por variante. A leitura assume divisão de tráfego balanceada entre os grupos (padrão de A/B randomizado).</li>
+<li><strong>Materialidade:</strong> exige-se diferença mínima de 5% vs 2º colocado para recomendar a troca; abaixo disso, o resultado é sinalizado como ganho modesto.</li>
+</ul>
+</body></html>
