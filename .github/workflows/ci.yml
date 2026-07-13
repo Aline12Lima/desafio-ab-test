@@ -1,0 +1,37 @@
+name: CI
+
+# Roda a cada push e a cada pull request na main
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) baixa o código do repositório
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # 2) instala o Python
+      - name: Configura o Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # 3) instala o projeto + dependências de dev (pytest, ruff)
+      - name: Instala dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      # 4) lint: o código segue o padrão? (não falha o build por enquanto)
+      - name: Lint (ruff)
+        run: ruff check . || true
+
+      # 5) roda a suíte de testes
+      - name: Testes (pytest)
+        run: pytest -q
