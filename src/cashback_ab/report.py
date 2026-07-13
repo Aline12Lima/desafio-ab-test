@@ -1,8 +1,8 @@
 """report.py — borda de saída: Recommendation -> relatório para gestor.
 
 Renderiza Markdown (base) a partir de um template Jinja2 e, opcionalmente,
-converte para HTML estilizado. Usa formatting para todo texto ao humano.
-Parte pura (string -> string) separada da parte de I/O (escreve arquivos).
+converte para HTML estilizado. Também constrói a narrativa da decisão em
+linguagem humana (narrar) — a apresentação é responsabilidade desta camada.
 """
 from __future__ import annotations
 
@@ -43,6 +43,33 @@ _HTML_SHELL = """<!DOCTYPE html>
 </body></html>"""
 
 
+def narrar(rec: Recommendation) -> str:
+    """Constrói a frase da decisão em linguagem humana, usando formatting.
+
+    Reconstrói a narrativa a partir dos fatos estruturados da Recommendation —
+    é aqui (apresentação) que os números viram texto formatado, não no núcleo.
+    """
+    c = rec.comparacao_decisiva
+    if rec.decisao == "ESCALAR":
+        return (
+            f"{rec.campeao} tem a maior margem total e supera {rec.vice} em "
+            f"{fmt_pct(c.dif_pct)} ao dia (p {fmt_p(c.p_wilcoxon)}, efeito "
+            f"{classificar_efeito(c.d_cohen)}). Diferença real e material — "
+            f"escalar {rec.campeao} a 100%."
+        )
+    if rec.decisao == "ESCALAR_COM_CAUTELA":
+        return (
+            f"{rec.campeao} vence {rec.vice} de forma estatisticamente real, mas "
+            f"por margem modesta ({fmt_pct(c.dif_pct)}). Escalar é defensável, "
+            f"porém o ganho pode não compensar o custo da troca."
+        )
+    return (
+        f"A diferença entre {rec.campeao} e {rec.vice} não é estatisticamente "
+        f"significativa (p {fmt_p(c.p_wilcoxon)}). Manter a variante de menor "
+        f"custo ({rec.variante_mais_barata}) e estender o teste para ganhar poder."
+    )
+
+
 def _contexto(rec: Recommendation, agg: pd.DataFrame, nome_teste: str,
               periodo: str, alpha: float, limiar_pct: float) -> dict:
     linhas = []
@@ -73,7 +100,7 @@ def _contexto(rec: Recommendation, agg: pd.DataFrame, nome_teste: str,
     return {
         "nome_teste": nome_teste, "periodo": periodo, "n_grupos": len(agg),
         "selo": SELOS[rec.decisao], "titulo_decisao": titulo,
-        "justificativa": rec.justificativa, "linhas": linhas, "comp": comp,
+        "justificativa": narrar(rec), "linhas": linhas, "comp": comp,
         "limiar_pct": fmt_pct(limiar_pct).lstrip("+"),
         "data_geracao": datetime.now().strftime("%d/%m/%Y %H:%M"),
     }

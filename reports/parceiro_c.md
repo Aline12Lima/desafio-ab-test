@@ -1,6 +1,6 @@
 # Relatório de Teste A/B — Parceiro C
 
-**Período:** 01/07/2011 a 14/08/2011  ·  **Variantes:** 2  ·  **Gerado em:** 12/07/2026 16:53
+**Período:** 01/07/2011 a 14/08/2011  ·  **Variantes:** 2  ·  **Gerado em:** 13/07/2026 10:58
 
 ---
 
@@ -8,7 +8,7 @@
 
 **Escalar Grupo 1 para 100% do tráfego**
 
-Grupo 1 tem a maior margem total e supera Grupo 2 em +inf% ao dia (p=5.7e-14, d de Cohen=3.87). Diferença real e material — escalar Grupo 1 a 100%.
+Grupo 1 tem a maior margem total e supera Grupo 2 em >999% ao dia (p < 0,001, efeito grande). Diferença real e material — escalar Grupo 1 a 100%.
 
 ---
 
