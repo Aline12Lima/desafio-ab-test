@@ -5,8 +5,15 @@
 **Uma solução reutilizável que analisa testes A/B de cashback e recomenda qual variante escalar para 100% do tráfego.**
 
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python&logoColor=white)
+![pandas](https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white)
+![SciPy](https://img.shields.io/badge/SciPy-8CAAE6?style=flat-square&logo=scipy&logoColor=white)
+![Typer](https://img.shields.io/badge/Typer-000000?style=flat-square&logo=typer&logoColor=white)
+![pytest](https://img.shields.io/badge/pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white)
+![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?style=flat-square&logo=googlesheets&logoColor=white)
+![Claude](https://img.shields.io/badge/Claude-D97757?style=flat-square&logo=anthropic&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
+
 ![CI](https://github.com/Aline12Lima/desafio-ab-test/actions/workflows/ci.yml/badge.svg)
-![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 
 📊 **[Planilha de acompanhamento (Google Sheets)](https://docs.google.com/spreadsheets/d/11lOqNc4Ov6bZlBSK5BQ2aV7m3NwThW3AqO4TUm5dwfQ/edit?usp=sharing)**
 
@@ -16,9 +23,9 @@
 
 ## O que essa ferramenta resolve
 
-O time de Growth da Méliuz roda dezenas de testes A/B de cashback por mês. Hoje, cada análise leva de 2 a 4 horas e depende de quem está olhando — o que gera inconsistência e vira gargalo.
+O time de Growth da Méliuz roda dezenas de testes A/B de cashback por mês. Hoje, cada análise leva de 2 a 4 horas e depende de quem está olhando  o que gera inconsistência e vira gargalo.
 
-Esta ferramenta automatiza esse processo: recebe o CSV de um teste A/B, valida os dados (robusta a formatos ruins), calcula as métricas de negócio, roda testes estatísticos, toma uma decisão acionável e entrega o resultado em relatório para gestor (Markdown + HTML) e numa planilha de acompanhamento (Google Sheets, com fallback em CSV). A mesma solução processa qualquer teste novo **sem alteração de código** — basta apontar o novo arquivo.
+Esta ferramenta automatiza esse processo: recebe o CSV de um teste A/B, valida os dados (robusta a formatos ruins), calcula as métricas de negócio, roda testes estatísticos, toma uma decisão acionável e entrega o resultado em relatório para gestor (Markdown + HTML) e numa planilha de acompanhamento (Google Sheets, com fallback em CSV). A mesma solução processa qualquer teste novo **sem alteração de código**  basta enviar o novo arquivo.
 
 ---
 
@@ -44,13 +51,13 @@ A resposta **não** pode se basear apenas em qual grupo gerou mais compradores o
 
 | Parceiro | Decisão | Justificativa |
 |---|---|---|
-| **A** | Escalar **Grupo 1** | Embora o Grupo 3 tenha mais compradores, o cashback maior derrubou a margem. O Grupo 1 (menor cashback) teve o melhor equilíbrio entre receita e custo — maior lucro para a Méliuz. |
+| **A** | Escalar **Grupo 1** | Embora o Grupo 3 tenha mais compradores, o cashback maior derrubou a margem. O Grupo 1 (menor cashback) teve o melhor equilíbrio entre receita e custo  maior lucro para a Méliuz. |
 | **B** | Escalar **Grupo 1** | O Grupo 1 teve margem líquida muito superior, com diferença estatisticamente significativa e material. Aqui, cashback maior foi lose-lose: menos compradores **e** menos margem. |
 | **C** | Escalar **Grupo 1** | O Grupo 2 zerou a margem (cashback = comissão) sem trazer compradores a mais. O Grupo 1 mantém a rentabilidade sem precisar aumentar o cashback. |
 
-### A armadilha (o coração da análise)
+### O coração da análise
 
-No Parceiro A, subir o cashback **realmente** traz mais compradores e mais GMV. Quem olhar só "conversão" ou "vendas totais" escolheria o Grupo 3 — e estaria escolhendo a pior opção para o negócio, porque a margem por comprador desaba e a margem total cai. Volume que não se paga não é crescimento: é subsídio. Por isso a métrica de decisão é a **margem**, não o volume.
+No Parceiro A, subir o cashback **realmente** traz mais compradores e mais GMV. Quem olhar só "conversão" ou "vendas totais" escolheria o Grupo 3  e estaria escolhendo a pior opção para o negócio, porque a margem por comprador desaba e a margem total cai. Volume que não se paga não é crescimento: é subsídio. Por isso a métrica de decisão é a **margem**, não o volume.
 
 ---
 
@@ -64,7 +71,7 @@ Margem = Comissão − Cashback
 ```
 É o retorno financeiro efetivo da Méliuz. Número de compradores e GMV entram como indicadores de apoio (diagnóstico), pois não refletem diretamente a lucratividade.
 
-**2. Comparação pareada, dia a dia.** Dentro de cada parceiro, os mesmos dias aparecem em todos os grupos, então comparo grupo contra grupo **no mesmo dia** (teste pareado). Isso cancela o efeito de dia da semana e sazonalidade, dando mais poder para detectar diferenças reais. O campeão (maior margem total) é comparado contra o 2º colocado — o desafiante mais forte; vencer dele implica vencer todos.
+**2. Comparação pareada, dia a dia.** Dentro de cada parceiro, os mesmos dias aparecem em todos os grupos, então comparo grupo contra grupo **no mesmo dia** (teste pareado). Isso cancela o efeito de dia da semana e sazonalidade, dando mais poder para detectar diferenças reais. O campeão (maior margem total) é comparado contra o 2º colocado  o desafiante mais forte; vencer dele implica vencer todos.
 
 **3. O portão de decisão — real E relevante.** Uma diferença só vira recomendação se for:
 - **Significativa** (teste de Wilcoxon pareado, com t pareado como checagem cruzada; p < 0,05), e
@@ -103,7 +110,7 @@ CSV → data_io → metrics → stats → decision → report / sheets
 
 ### Camada AI-Native (`CLAUDE.md`)
 
-O arquivo `CLAUDE.md` instrui assistentes como o Claude Code a operar a solução em linguagem natural. Um colaborador pode pedir *"analisa o teste do Parceiro C e registra na planilha"* e o assistente roda o comando `analyze`, resume a decisão e confirma o registro — sem tocar no código. É o que torna a solução verdadeiramente reutilizável.
+O arquivo `CLAUDE.md` instrui assistentes como o Claude Code a operar a solução em linguagem natural. Um colaborador pode pedir *"analisa o teste do Parceiro C e registra na planilha"* e o assistente roda o comando `analyze`, resume a decisão e confirma o registro  sem tocar no código. É o que torna a solução verdadeiramente reutilizável.
 
 ---
 
@@ -179,7 +186,7 @@ A suíte cobre as peças críticas: o parser de `R$` e a validação (`test_io`)
 ## Limitações e próximos passos
 
 - **Compradores, não usuários expostos.** Os dados trazem compradores, não o total de usuários expostos por variante. A leitura assume divisão de tráfego balanceada entre os grupos (padrão de A/B randomizado). Com o total de expostos, seria possível calcular a taxa de conversão real.
-- **Sem LTV / retenção.** A decisão otimiza a margem do período do teste. Um cashback maior pode fazer sentido estrategicamente se aumentar retenção/LTV — algo que estes dados não capturam.
+- **Sem LTV / retenção.** A decisão otimiza a margem do período do teste. Um cashback maior pode fazer sentido estrategicamente se aumentar retenção/LTV algo que estes dados não capturam.
 - **Correção de múltiplas comparações.** Com 3 grupos há comparações par a par; uma correção (Holm/Bonferroni) tornaria o critério mais rigoroso. Aqui os p-valores são tão baixos que não alteraria a decisão, mas é uma melhoria natural.
 - **Próximos passos:** dashboard interativo, suporte a mais de um teste por execução (lote) e alertas automáticos.
 
@@ -215,6 +222,6 @@ cashback-ab-analyzer/
 
 <div align="center">
 
-Desenvolvido por **Aline Lima** · Teste técnico Méliuz — Estágio de Growth (IA e Automação)
+Desenvolvido por **Aline Lima** · Teste técnico Méliuz — Estágio de (IA e Automação)
 
 </div>
