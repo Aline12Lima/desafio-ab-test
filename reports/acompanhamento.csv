@@ -1,0 +1,4 @@
+Data,Teste,Descrição,Variantes,Resultado,Decisão,Detalhe estatístico
+2026-07-13 10:58,Parceiro A,Cashback 4% vs 6% vs 7%,"Grupo 1, Grupo 2, Grupo 3",Grupo 1 vence (+13% de margem vs Grupo 2),ESCALAR,"dif R$ 513/dia; p Wilcoxon <0,001; d=0.46; n=92 dias"
+2026-07-13 10:58,Parceiro B,Cashback 4% vs 6% vs 9%,"Grupo 1, Grupo 2, Grupo 3",Grupo 1 vence (+100% de margem vs Grupo 2),ESCALAR,"dif R$ 2.351/dia; p Wilcoxon <0,001; d=1.97; n=61 dias"
+2026-07-13 10:58,Parceiro C,Cashback 5% vs 7%,"Grupo 1, Grupo 2",Grupo 1 vence (>999% de margem vs Grupo 2),ESCALAR,"dif R$ 773/dia; p Wilcoxon <0,001; d=3.87; n=45 dias"
